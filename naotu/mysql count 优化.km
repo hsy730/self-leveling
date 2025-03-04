@@ -1,0 +1,320 @@
+{
+    "root": {
+        "data": {
+            "id": "d86p5lojvts0",
+            "created": 1741011743975,
+            "text": "单表过亿数据count(*)"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d86p5xsj0x40",
+                    "created": 1741011770337,
+                    "text": "INNODB"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d86p7smw7kg0",
+                            "created": 1741011915841,
+                            "text": "执行操作时，读取每行数据累加计数",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d86pe0txw940",
+                                    "created": 1741012403866,
+                                    "text": "全表扫描"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d86pe6j34680",
+                                    "created": 1741012416270,
+                                    "text": "全索引扫描",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d86pkbcq4yo0",
+                                            "created": 1741012896955,
+                                            "text": "主键索引， 也即聚簇索引"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d86pp3kfk3s0",
+                                                    "created": 1741013271827,
+                                                    "text": "主键值"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d86pp762wi80",
+                                                    "created": 1741013279666,
+                                                    "text": "完整行数据"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d86ppgh6aco0",
+                                                    "created": 1741013299928,
+                                                    "text": "事务ID， 回滚指针 "
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d86pq2qlcgw0",
+                                                            "created": 1741013348387,
+                                                            "text": "支持事务和 MVCC（多版本并发控制）"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d86pnmf2k1c0",
+                                            "created": 1741013156133,
+                                            "text": "二级索引"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d86po8mwe4g0",
+                                                    "created": 1741013204496,
+                                                    "text": "存储索引列的值和主键值"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d86pokydpnk0",
+                                                    "created": 1741013231312,
+                                                    "text": "不存储完整的行数据"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d86pos5hxpc0",
+                                                    "created": 1741013246979,
+                                                    "text": "要通过主键值回表"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d86pr08atag0",
+                                            "created": 1741013421291,
+                                            "text": "优先使用二级索引，其次是主键索引"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d86pt6pakts0",
+                                                    "created": 1741013592108,
+                                                    "text": "InnoDB 会选择占用空间最小的索引。"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d86pj9lziig0",
+                                    "created": 1741012814797,
+                                    "text": "innodb使用聚簇索引",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d86pipctpd40",
+                                            "created": 1741012770707,
+                                            "text": "主键索引（Primary Key Index） 的叶子节点存储了完整的行数据"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d86puuhy0og0",
+                            "created": 1741013722271,
+                            "text": "redis累加计数"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d86pxu2g7wo0",
+                                    "created": 1741013956426,
+                                    "text": "incr 或 incrby 命令"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d86pyi4eb8w0",
+                                    "created": 1741014008787,
+                                    "text": "性能高，但可能存在一致性问题"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d86pz5gjssg0",
+                            "created": 1741014059588,
+                            "text": "mysql累加计数 + 事务"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d86pzsutebs0",
+                                    "created": 1741014110516,
+                                    "text": "解决了一致性问题"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d86q0tliqn40",
+                                    "created": 1741014190495,
+                                    "text": "性能不如redis"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87irl4sndc0",
+                            "created": 1741095278979,
+                            "text": "mysql累加计数 + 触发器"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87isle9jog0",
+                                    "created": 1741095357916,
+                                    "text": "不污染工程代码"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87it5kj62g0",
+                                    "created": 1741095401831,
+                                    "text": "兼顾性能和准确性"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87itej5qk80",
+                            "created": 1741095421339,
+                            "text": "mysql增加并发线程"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87ivv28gls0",
+                                    "created": 1741095614049,
+                                    "text": "mysql8.0支持 并行查询 "
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87iw70bwmg0",
+                                            "created": 1741095640055,
+                                            "text": "innodb_parallel_read_threads "
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87ixpr9qy80",
+                                    "created": 1741095759230,
+                                    "text": "改动简单，见效快"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87ixw4xm0o0",
+                                    "created": 1741095773117,
+                                    "text": "增大数据库的IOPS压力"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87iypqqhgo0",
+                            "created": 1741095837562,
+                            "text": "mysql增加二级索引"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d87j1op5z4o0",
+                            "created": 1741096070383,
+                            "text": "SHOW TABLE STATUS"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87j5vu7ty00",
+                                    "created": 1741096399383,
+                                    "text": "估算结果，有偏差"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d86p6uycqu80",
+                    "created": 1741011842523,
+                    "text": "MYISAM"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d86p8kxy0mw0",
+                            "created": 1741011977459,
+                            "text": "提前存储了总行数，直接返回"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

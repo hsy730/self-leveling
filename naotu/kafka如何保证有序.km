@@ -1,1 +1,392 @@
-{"root":{"data":{"id":"d85f7i01yi80","created":1740882121636,"text":"kafka如何保证有序"},"children":[{"data":{"id":"d85fldf1ns00","created":1740883208757,"text":"Producer","expandState":"expand"},"children":[{"data":{"id":"d85fournh2g0","created":1740883481617,"text":"主线程"},"children":[{"data":{"id":"d85fp1cvicg0","created":1740883495961,"text":"创建消息"},"children":[]},{"data":{"id":"d85fp5f56g80","created":1740883504805,"text":"拦截器"},"children":[]},{"data":{"id":"d85fp8g27sw0","created":1740883511391,"text":"序列化器"},"children":[]},{"data":{"id":"d85fpbixgzc0","created":1740883518095,"text":"分区器","expandState":"expand"},"children":[{"data":{"id":"d85fr4xzo8g0","created":1740883660496,"text":"默认配置","expandState":"expand"},"children":[{"data":{"id":"d85fqnfph6g0","created":1740883622385,"text":"消息键值为 null"},"children":[{"data":{"id":"d85frkdhq9s0","created":1740883694085,"text":"使用轮询（Round Robin）算法决定分区归属"},"children":[]}]},{"data":{"id":"d85fqp6t0pc0","created":1740883626201,"text":"消息键值不为空"},"children":[{"data":{"id":"d85frpedabs0","created":1740883705022,"text":"对键进行散列（Hash）的方式来决定分区归属。"},"children":[]}]}]}]},{"data":{"id":"d85fpei3qw00","created":1740883524575,"text":"消息累加器","expandState":"expand"},"children":[{"data":{"id":"d85ffy0fkag0","created":1740882783401,"text":"作用：批量累积消息 ","expandState":"expand"},"children":[{"data":{"id":"d85fgflvuco0","created":1740882821703,"text":"将多个小消息合并成一个更大的批次（Batch）"},"children":[]},{"data":{"id":"d85ffzr84f40","created":1740882787198,"text":"目的：从而减少网络请求次数，提高吞吐量。"},"children":[]}]}]}]},{"data":{"id":"d85f8l4djc00","created":1740882206792,"text":"sender线程"},"children":[{"data":{"id":"d85famdk1qw0","created":1740882366252,"text":"发送消息至kafka broker","expandState":"expand"},"children":[{"data":{"id":"d85f8ycj8nk0","created":1740882235583,"text":"1. 从消息累加器读取消息"},"children":[]},{"data":{"id":"d85f9nrkco00","created":1740882290912,"text":"2. 封装request对象"},"children":[{"data":{"id":"d85f9wi75yo0","created":1740882309936,"text":"打包发送消息的载体"},"children":[]}]},{"data":{"id":"d85faatl46w0","created":1740882341100,"text":"3. 缓存至InFlightRequests"},"children":[{"data":{"id":"d85fbc8ry000","created":1740882422559,"text":"作用：存放的是已经发出去、但还没有收到响应的Request对象，默认值为5"},"children":[]},{"data":{"id":"d85fbyvwt7s0","created":1740882471847,"text":"限制条件：一旦超出这个阈值，Producer就不会再往这个Broker节点发送请求了。"},"children":[]},{"data":{"id":"d85fejcef2w0","created":1740882673108,"text":"目的：防止消息发送密集而导致Broker节点的负载过高。"},"children":[]}]}]}]},{"data":{"id":"d85fi6qns540","created":1740882959129,"text":"参数"},"children":[{"data":{"id":"d85fiaglyu80","created":1740882967229,"text":"max.in.flight.requests.per.connection"},"children":[{"data":{"id":"d85fij07gq80","created":1740882985828,"text":"该参数作用于InFlightRequests缓存区域，用来设置Producer在收到Broker响应之前，可以发送几个批次的消息，默认值为5。"},"children":[]}]},{"data":{"id":"d85fiyqxb880","created":1740883020095,"text":"retries"},"children":[{"data":{"id":"d85fiyy9ib40","created":1740883020539,"text":"设置当Producer发送消息失败时，可以进行重试的次数，默认值为0，也就是不进行重试。"},"children":[]}]},{"data":{"id":"d85fjpy2b7k0","created":1740883079300,"text":"【特别注意】","priority":null},"children":[{"data":{"id":"d85fjwyhuk80","created":1740883094563,"text":"为保证发送消息有序，生产者端的max.in.flight.requests.per.connection和retries这两个参数必须得有一个等于0"},"children":[{"data":{"id":"d85fkhpindc0","created":1740883139733,"text":"原因： 如果我们将retries参数值设置为1，在max.in.flight.requests.per.connection的参数值大于1的情况下，Request1批次的消息发送失败，Request2批次的消息发送成功，此时Request1批次的消息进行重试发送也成功了，那两者的顺序就反过来了。"},"children":[]}]}]}]}]},{"data":{"id":"d85flogbojs0","created":1740883232779,"text":"Consumer"},"children":[{"data":{"id":"d85fn2jt18o0","created":1740883341828,"text":"参数"},"children":[{"data":{"id":"d85fn7e0nmo0","created":1740883352362,"text":"max.poll.records"},"children":[]}]}]},{"data":{"id":"d85fykhkpl40","created":1740884242881,"text":"有序性","expandState":"expand"},"children":[{"data":{"id":"d85fszm0bzk0","created":1740883805616,"text":"业务有序性"},"children":[{"data":{"id":"d85ft2b2qio0","created":1740883811485,"text":"保证某一个订单（设备等）的所有操作有序。"},"children":[{"data":{"id":"d85fw5bx4540","created":1740884053159,"text":"key使用同一个， 消息默认发送到同一个分区"},"children":[]}]}]},{"data":{"id":"d85fsm5d6tk0","created":1740883776312,"text":"全局有序性","expandState":"expand"},"children":[{"data":{"id":"d85fuhc0z8g0","created":1740883922559,"text":"所有的消息都有序","expandState":"expand"},"children":[{"data":{"id":"d85fsqeu68w0","created":1740883785593,"text":"只建一个分区"},"children":[]}]}]},{"data":{"id":"d85fywa6dhk0","created":1740884268555,"text":"单线程消费"},"children":[]}]}]},"template":"default","theme":"fresh-blue","version":"1.4.43"}
+{
+    "root": {
+        "data": {
+            "id": "d85f7i01yi80",
+            "created": 1740882121636,
+            "text": "kafka如何保证有序"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d85fldf1ns00",
+                    "created": 1740883208757,
+                    "text": "Producer",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d85fournh2g0",
+                            "created": 1740883481617,
+                            "text": "主线程"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d85fp1cvicg0",
+                                    "created": 1740883495961,
+                                    "text": "创建消息"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d85fp5f56g80",
+                                    "created": 1740883504805,
+                                    "text": "拦截器"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d85fp8g27sw0",
+                                    "created": 1740883511391,
+                                    "text": "序列化器"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d85fpbixgzc0",
+                                    "created": 1740883518095,
+                                    "text": "分区器",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85fr4xzo8g0",
+                                            "created": 1740883660496,
+                                            "text": "默认配置",
+                                            "expandState": "expand"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d85fqnfph6g0",
+                                                    "created": 1740883622385,
+                                                    "text": "消息键值为 null"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d85frkdhq9s0",
+                                                            "created": 1740883694085,
+                                                            "text": "使用轮询（Round Robin）算法决定分区归属"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d85fqp6t0pc0",
+                                                    "created": 1740883626201,
+                                                    "text": "消息键值不为空"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d85frpedabs0",
+                                                            "created": 1740883705022,
+                                                            "text": "对键进行散列（Hash）的方式来决定分区归属。"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d85fpei3qw00",
+                                    "created": 1740883524575,
+                                    "text": "消息累加器",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85ffy0fkag0",
+                                            "created": 1740882783401,
+                                            "text": "作用：批量累积消息 ",
+                                            "expandState": "expand"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d85fgflvuco0",
+                                                    "created": 1740882821703,
+                                                    "text": "将多个小消息合并成一个更大的批次（Batch）"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d85ffzr84f40",
+                                                    "created": 1740882787198,
+                                                    "text": "目的：从而减少网络请求次数，提高吞吐量。"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d85f8l4djc00",
+                            "created": 1740882206792,
+                            "text": "sender线程"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d85famdk1qw0",
+                                    "created": 1740882366252,
+                                    "text": "发送消息至kafka broker",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85f8ycj8nk0",
+                                            "created": 1740882235583,
+                                            "text": "1. 从消息累加器读取消息"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d85f9nrkco00",
+                                            "created": 1740882290912,
+                                            "text": "2. 封装request对象"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d85f9wi75yo0",
+                                                    "created": 1740882309936,
+                                                    "text": "打包发送消息的载体"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d85faatl46w0",
+                                            "created": 1740882341100,
+                                            "text": "3. 缓存至InFlightRequests"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d85fbc8ry000",
+                                                    "created": 1740882422559,
+                                                    "text": "作用：存放的是已经发出去、但还没有收到响应的Request对象，默认值为5"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d85fbyvwt7s0",
+                                                    "created": 1740882471847,
+                                                    "text": "限制条件：一旦超出这个阈值，Producer就不会再往这个Broker节点发送请求了。"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d85fejcef2w0",
+                                                    "created": 1740882673108,
+                                                    "text": "目的：防止消息发送密集而导致Broker节点的负载过高。"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d85fi6qns540",
+                            "created": 1740882959129,
+                            "text": "参数"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d85fiaglyu80",
+                                    "created": 1740882967229,
+                                    "text": "max.in.flight.requests.per.connection"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85fij07gq80",
+                                            "created": 1740882985828,
+                                            "text": "该参数作用于InFlightRequests缓存区域，用来设置Producer在收到Broker响应之前，可以发送几个批次的消息，默认值为5。"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d85fiyqxb880",
+                                    "created": 1740883020095,
+                                    "text": "retries"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85fiyy9ib40",
+                                            "created": 1740883020539,
+                                            "text": "设置当Producer发送消息失败时，可以进行重试的次数，默认值为0，也就是不进行重试。"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d85fjpy2b7k0",
+                                    "created": 1740883079300,
+                                    "text": "【特别注意】",
+                                    "priority": null
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85fjwyhuk80",
+                                            "created": 1740883094563,
+                                            "text": "为保证发送消息有序，生产者端的max.in.flight.requests.per.connection和retries这两个参数必须得有一个等于0"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d85fkhpindc0",
+                                                    "created": 1740883139733,
+                                                    "text": "原因： 如果我们将retries参数值设置为1，在max.in.flight.requests.per.connection的参数值大于1的情况下，Request1批次的消息发送失败，Request2批次的消息发送成功，此时Request1批次的消息进行重试发送也成功了，那两者的顺序就反过来了。"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d85flogbojs0",
+                    "created": 1740883232779,
+                    "text": "Consumer"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d85fn2jt18o0",
+                            "created": 1740883341828,
+                            "text": "参数"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d85fn7e0nmo0",
+                                    "created": 1740883352362,
+                                    "text": "max.poll.records"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d85fykhkpl40",
+                    "created": 1740884242881,
+                    "text": "有序性",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d85fszm0bzk0",
+                            "created": 1740883805616,
+                            "text": "业务有序性"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d85ft2b2qio0",
+                                    "created": 1740883811485,
+                                    "text": "保证某一个订单（设备等）的所有操作有序。"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85fw5bx4540",
+                                            "created": 1740884053159,
+                                            "text": "key使用同一个， 消息默认发送到同一个分区"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d85fsm5d6tk0",
+                            "created": 1740883776312,
+                            "text": "全局有序性",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d85fuhc0z8g0",
+                                    "created": 1740883922559,
+                                    "text": "所有的消息都有序",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d85fsqeu68w0",
+                                            "created": 1740883785593,
+                                            "text": "只建一个分区"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d85fywa6dhk0",
+                            "created": 1740884268555,
+                            "text": "单线程消费"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
