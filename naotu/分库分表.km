@@ -1,0 +1,270 @@
+{
+    "root": {
+        "data": {
+            "id": "d87l2g2bj6w0",
+            "created": 1741101772171,
+            "text": "分库分表"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d87l6zq60pk0",
+                    "created": 1741102128429,
+                    "text": "拆分方式",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87l2ovl1gg0",
+                            "created": 1741101791355,
+                            "text": "水平拆分"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87l36c6eg80",
+                                    "created": 1741101829364,
+                                    "text": "将一张表的数据拆分到多张表中"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87le00jhrs0",
+                                    "created": 1741102677605,
+                                    "text": "拆分策略"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87lef2uqqo0",
+                                            "created": 1741102710397,
+                                            "text": "Range 拆分"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d87liggbvrk0",
+                                                    "created": 1741103026845,
+                                                    "text": "如时间"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d87ljn3s3m80",
+                                                            "created": 1741103119688,
+                                                            "text": "热点聚合"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d87lefvv2rk0",
+                                            "created": 1741102712151,
+                                            "text": "Hash 取模拆分"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d87liojswmo0",
+                                                    "created": 1741103044469,
+                                                    "text": "如ID"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d87ljvcjqlc0",
+                                                            "created": 1741103137632,
+                                                            "text": "热点分散"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d87lelb5coo0",
+                                            "created": 1741102723959,
+                                            "text": "Hash 取模 + Range 拆分"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "d87lepofzdk0",
+                                            "created": 1741102733470,
+                                            "text": "Hash 取模 + 映射表拆分"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87l2to0xx40",
+                            "created": 1741101801782,
+                            "text": "垂直拆分"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87l3tks0ls0",
+                                    "created": 1741101879950,
+                                    "text": "把一些不常用的字段或大字段拆分出去"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87l4b0b2g80",
+                                    "created": 1741101917894,
+                                    "text": "拆分后的业务主表的数据记录更小"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87l4g8klig0",
+                                    "created": 1741101929278,
+                                    "text": "一个 16k 的数据页就可以存储更多数据。"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d87l98qve940",
+                    "created": 1741102304791,
+                    "text": "锁分类"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87l9dz58gw0",
+                            "created": 1741102316175,
+                            "text": "实现粒度"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87l9mpwhvc0",
+                                    "created": 1741102335207,
+                                    "text": "全局锁"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87l9o8lwvk0",
+                                    "created": 1741102338515,
+                                    "text": "表锁"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87l9s9g3940",
+                                    "created": 1741102347273,
+                                    "text": "页锁"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87l9vv2xbk0",
+                                    "created": 1741102355111,
+                                    "text": "行锁"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87la8n02m00",
+                            "created": 1741102382921,
+                            "text": "操作类型"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87ladypgo80",
+                                    "created": 1741102394513,
+                                    "text": "共享锁"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d87laflfeq80",
+                                    "created": 1741102398063,
+                                    "text": "独占锁"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d87lboiubcg0",
+                    "created": 1741102495862,
+                    "text": "优化方向",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87l76nyab40",
+                            "created": 1741102143532,
+                            "text": "分库"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87l7dsgxt40",
+                                    "created": 1741102159043,
+                                    "text": "数据库服务器的硬件资源成为瓶颈"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87l7wc8fu80",
+                            "created": 1741102199420,
+                            "text": "分表"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87l82tgvyw0",
+                                    "created": 1741102213523,
+                                    "text": "瓶颈是锁而不是硬件资源"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

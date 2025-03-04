@@ -1,0 +1,382 @@
+{
+    "root": {
+        "data": {
+            "id": "d87jb7d4nq80",
+            "created": 1741096816292,
+            "text": "JVM 调优"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d87jcetm3fk0",
+                    "created": 1741096910890,
+                    "text": "监控"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87jdc1zi3k0",
+                            "created": 1741096983230,
+                            "text": "监控工具 Prometheus + Grafana"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d87jen5mlc80",
+                    "created": 1741097085759,
+                    "text": "参数"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87k8u3uffc0",
+                            "created": 1741099451814,
+                            "text": "垃圾回收"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87k9it236g0",
+                                    "created": 1741099505581,
+                                    "text": "-XX:+UseParallelOldGC"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87k9p5x40g0",
+                                            "created": 1741099519419,
+                                            "text": "最大吞吐量"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87k9xjoa0g0",
+                                    "created": 1741099537665,
+                                    "text": "-XX:+UseG1GC"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87ka33dins0",
+                                            "created": 1741099549740,
+                                            "text": "吞吐量和停顿时间中进行平衡"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87ka7zzmuw0",
+                                    "created": 1741099560420,
+                                    "text": "-XX:+UseZGC"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87kae8ec2o0",
+                                            "created": 1741099573989,
+                                            "text": "最短停顿时间为目标"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87kb2tf20g0",
+                                    "created": 1741099627502,
+                                    "text": "-XX:+UseSerialGC"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87kb7b3fk80",
+                                            "created": 1741099637278,
+                                            "text": "占用内存小，启动速度快"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87kpoim2c80",
+                                    "created": 1741100771837,
+                                    "text": "-XX:ParallelGCThreads=8"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87kpopqsew0",
+                                            "created": 1741100772268,
+                                            "text": "GC的并行线程数量"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87k910kojs0",
+                            "created": 1741099466853,
+                            "text": "内存参数",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87jeqd2qjk0",
+                                    "created": 1741097092740,
+                                    "text": "-Xmx3072m"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87jevec6iw0",
+                                            "created": 1741097103700,
+                                            "text": "设置最大堆内存"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d87jhnwhrjc0",
+                                                    "created": 1741097322476,
+                                                    "text": "设置偏小"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d87jhshwvt40",
+                                                            "created": 1741097332478,
+                                                            "text": "内存不足，频繁GC"
+                                                        },
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "data": {
+                                                            "id": "d87ji86xlg80",
+                                                            "created": 1741097366643,
+                                                            "text": "OOM"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d87jidt6ixs0",
+                                                    "created": 1741097378872,
+                                                    "text": "设置偏大"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d87jjcmxif40",
+                                                            "created": 1741097454681,
+                                                            "text": "非堆内存消耗"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "d87jk0s0nv40",
+                                                                    "created": 1741097507232,
+                                                                    "text": "如方法区、元空间、线程栈等"
+                                                                },
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d87jv55f5kw0",
+                                                    "created": 1741098378755,
+                                                    "text": "建议物理内存的60%——80%"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87jz41mwn40",
+                                    "created": 1741098689806,
+                                    "text": "-Xms3072m"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87jz7c0plk0",
+                                            "created": 1741098696964,
+                                            "text": "初始堆内存"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d87jzigmdao0",
+                                                    "created": 1741098721187,
+                                                    "text": "将 -Xms 和 -Xmx 设置为相同值的主要目的是 避免堆内存的动态扩展和收缩"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87k6wjf6jk0",
+                                    "created": 1741099300381,
+                                    "text": "-XX:MaxDirectMemorySize=512m"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87k77117xk0",
+                                            "created": 1741099323213,
+                                            "text": "设置堆外内存，若不进行指定，则跟-Xmx值一致"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d87ke11f3og0",
+                            "created": 1741099858725,
+                            "text": "其他参数"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d87ke54utuo0",
+                                    "created": 1741099867640,
+                                    "text": "-XX:InitialTenuringThreshold=7"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87ke7udlbs0",
+                                            "created": 1741099873537,
+                                            "text": "年轻代进入老年代的年龄值"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d87kegqafww0",
+                                    "created": 1741099892881,
+                                    "text": "-XX:PretenureSizeThreshold=1048576"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d87kejqnfio0",
+                                            "created": 1741099899433,
+                                            "text": "新生代可容纳的最大对象"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d87jdfi3lco0",
+                    "created": 1741096990735,
+                    "text": "目标二选一",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87kj8ggqts0",
+                            "created": 1741100266693,
+                            "text": "在内存有限的情况下，两个优化方向，不可兼得"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d87kjtuc6ao0",
+                            "created": 1741100313245,
+                            "text": "最大吞吐量"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d87kjxlyohs0",
+                            "created": 1741100321445,
+                            "text": "最短停顿时间"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d87klt0n2zs0",
+                    "created": 1741100468177,
+                    "text": "分析方向"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d87klw4fsgo0",
+                            "created": 1741100474937,
+                            "text": "Young & Full & Mixed GC 频率"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d87km2wbwk80",
+                            "created": 1741100489684,
+                            "text": "Young & Full & Mixed GC 耗时"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d87km6kag740",
+                            "created": 1741100497663,
+                            "text": "系统负载、CPU 使用率、JVM 参数配置"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d87kmj9fcy80",
+                            "created": 1741100525305,
+                            "text": "内存泄露、OOM、线程死锁等"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
