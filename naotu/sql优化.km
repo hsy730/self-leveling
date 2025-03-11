@@ -1,0 +1,166 @@
+{
+    "root": {
+        "data": {
+            "id": "d88dxuv9za80",
+            "created": 1741183224764,
+            "text": "sql优化"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d88dxzp1v5c0",
+                    "created": 1741183235271,
+                    "text": "优先过滤原则"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d88dy6myfsg0",
+                            "created": 1741183250382,
+                            "text": "过滤有限于排序，特别是过滤后的数据量级减少，排序会很快。"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d88e01cdee80",
+                    "created": 1741183395586,
+                    "text": "索引优化"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "d88e1zhehow0",
+                    "created": 1741183548265,
+                    "text": "explain分析sql查询"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d88e275nico0",
+                            "created": 1741183564969,
+                            "text": "type"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d88e2agqjs00",
+                                    "created": 1741183572170,
+                                    "text": "all：全表扫描"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "d88e2hwfun40",
+                                    "created": 1741183588357,
+                                    "text": "index； 索引"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d88e391olnk0",
+                            "created": 1741183647447,
+                            "text": "extra"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d88e3nwnhps0",
+                                    "created": 1741183679794,
+                                    "text": "Using filesort：使用文件排序"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d88edliqgi80",
+                                            "created": 1741184458241,
+                                            "text": "常见场景"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d88eduluylc0",
+                                                    "created": 1741184478021,
+                                                    "text": "当查询包含 ORDER BY 子句时，MySQL 可能需要对结果集排序"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d88ee2cu2880",
+                                                    "created": 1741184494889,
+                                                    "text": "如果 GROUP BY 的列没有索引，MySQL 可能需要对数据进行排序"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d88eg04ur540",
+                                                    "created": 1741184646782,
+                                                    "text": "当查询包含 JOIN 时，MySQL 可能需要对连接结果排序"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d88e3txg7r40",
+                                    "created": 1741183692903,
+                                    "text": "Using temporary：使用临时表"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d88e89pjmzc0",
+                                            "created": 1741184040711,
+                                            "text": "常见场景"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d88e8q9zqf40",
+                                                    "created": 1741184076775,
+                                                    "text": "当查询包含 GROUP BY 子句时，MySQL 可能需要临时表来分组数据。"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d88e93d32so0",
+                                                    "created": 1741184105261,
+                                                    "text": "当查询包含 DISTINCT 时，MySQL 可能需要临时表去重。"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "d88e9k37rnc0",
+                                                    "created": 1741184141670,
+                                                    "text": "当查询包含 UNION 时，MySQL 可能需要临时表合并结果集。"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
